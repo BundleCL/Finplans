@@ -1,0 +1,231 @@
+/* Divisiones principales */
+#content {
+    font-weight: lighter;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-y: auto;
+    padding: 0 2vw 0 2vw;
+}
+#inicio {
+    display: flex;
+    flex-flow: row;
+    margin: 0 0vw 0 2vw;
+    justify-content: space-between;
+    align-items: center;
+}
+#inicio img {
+    width: 50vw;
+    margin-left: -10vw;
+    margin-right: -3vw;
+}
+#unirse {
+    margin-top: 2rem;
+}
+#que-es-finplans {
+    padding: 2vh 5vw 0 5vw;
+}
+#asi-de-facil {
+    margin-top: 10vh;
+    padding: 5vh 5vw 0 5vw;
+    justify-content: center;
+    align-content: center;
+}
+#testimonios {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 10vh;
+}
+#carousel {
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    margin-top: 2vh;
+    width: 60vw;
+    text-align: left;
+    justify-content: space-between;
+}
+#testimonio {
+    font-style: italic;
+    line-height: 2.5rem;
+}
+#author {
+    font-style: normal;
+    font-weight: 600;
+}
+#btn-left {
+    width: 0; 
+    height: 0; 
+    border-top: 1rem solid transparent;
+    border-bottom: 1rem solid transparent; 
+    border-right:1rem solid #006CFF;
+    margin-right: 10vw;
+}
+#btn-right {
+    width: 0; 
+    height: 0; 
+    border-top: 1rem solid transparent;
+    border-bottom: 1rem solid transparent;
+    border-left: 1rem solid #006CFF;
+    margin-left: 10vw;
+}
+#solicita-tu-invitacion {
+    padding-top: 15vh;
+    margin-top: 10vh;
+    align-items: center;
+    justify-content: space-evenly;
+}
+#name, #lastname {
+    width: 14vw;
+}
+#nosotros {
+    margin-top: 10vh;
+    padding-top: 5vh;
+    align-items: center;
+}
+
+/* Filas y columnas específicas */
+.flex-col {
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+}
+.flex-row {
+    display: flex;
+    flex-flow: row;
+    text-align: center;
+}
+.col-1, .col-2 {
+    display: flex;
+    flex-flow: column;
+    width: fit-content;
+}
+.col-2 {
+    align-items: center;
+    width: 20vw;
+}
+.col-2 img {
+    width: 10vw;
+}
+.col-3 {
+    width: 40vw;
+    height: 50vh;
+    justify-content: space-evenly;
+}
+.col-4{
+    flex-flow: column;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-top: 4vh;
+    width: 60vw;
+}
+.col-4 h4 {
+    margin: 0;
+    line-height: 2rem;
+}
+.col-4 img {
+    height: 20vw;
+    border-radius: 50%;
+}
+.col-4 .flex-row {
+    margin-top: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.bold {
+    font-weight: bold;
+}
+.row-1 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding-top: 10vh;
+}
+.row-2 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;  
+    padding-top: 10vh;
+}
+.row-2 p{
+    width: 12vw;
+    padding-right: 3vw;
+    padding-left: 3vw;
+}
+
+/* Utilidades */
+.opacity08 {
+    opacity: 0.8;
+}
+.bold {
+    font-weight: 700;
+}
+.number-circle {
+    display: flex;
+    background-color: #006CFF;
+    color: white;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+.quote {
+    color: #006CFF;
+    line-height: 1rem;
+    margin-bottom: -1vh;
+}
+.left-align {
+    text-align: left;
+}
+.right-align {
+    text-align: right;
+}
+
+/* Form */
+.form {
+    width: 35vw;
+    height: 60vh;
+    justify-content: space-evenly;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(0, 0, 0, 0.5);
+    text-align: left;
+    padding: 5vh 5vw 5vh;
+}
+.form div {
+    justify-content: space-between;
+}
+.form button {
+    margin-top: 10vh;
+}
+.form input {
+    font-family: Lato;
+    font-size: 1.1rem;
+    padding: 2vh;
+}
+
+/* Footer */
+.footer-row {
+    margin-top: 20vh;
+    margin-bottom: 3vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+.contacto, .social {
+    justify-content: space-evenly;
+    align-items: center
+}
+.social {
+    width: 20vw;
+}
+.social img {
+    width: 2.5vw;
+}
