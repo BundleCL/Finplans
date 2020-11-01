@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"><link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;900&display=swap" rel="stylesheet">        
         <link href="src/assets/styles/main.css" rel="stylesheet" />
         <link href="src/assets/styles/index.css" rel="stylesheet" />
@@ -9,8 +11,11 @@
     </head>
     <body>
         <div class="navbar">
+            <div class="nav-icon">
+                <div class="menu-icon"></div>
+            </div>
+            <a class="logo" href="#">FINPLANS</a>
             <div class="navbar-left">
-                <a class="logo" href="#">FINPLANS</a>
                 <a class="nav-item" href="#que-es-finplans">¿Qué es Finplans?</a>
                 <a class="nav-item" href="#nosotros">Nosotros</a>
             </div>
@@ -28,7 +33,7 @@
                 <img src="src/assets/imgs/make-it-rain.png"/>
             </div>
             <div id="que-es-finplans" class="flex-col">
-                <h1>¿Qué es Finplans?</h1>
+                <h2>¿Qué es Finplans?</h2>
                 <h3 class="opacity08">Finplans es una aplicación que entrega un servicio financiero
                      que ayudará a las personas a ahorrar y visualizar sus finanzas personales, 
                      donde tú podrás cumplir tus objetivos financieros ahorrando automáticamente
@@ -93,7 +98,7 @@
             <div id="solicita-tu-invitacion" class="flex-row">
                 <div class="flex-col col-3">
                     <h2>Solicita tu invitación</h2>
-                    <h3 class="opacity08">Déjanos tu mail y serás el primero en enterarte del lanzamiento de Finplans</h3>>
+                    <h3 class="opacity08">Déjanos tu mail y serás el primero en enterarte del lanzamiento de Finplans</h3>
                 </div>
                 <form action="#" class="flex-col form">
                     <h3>Quiero recibir información</h3>
@@ -110,10 +115,12 @@
                 <div class="col-4">
                     <h4 class="opacity08">Finplans nace a comienzos de la pandemia del Covid-19 con 
                         el propósito de poder ayudar a las personas a ahorrar para que cumplan sus 
-                        objetivos financieros.</h4>
+                        objetivos financieros.
+                    </h4>
                     <h4 class="opacity08">El equipo lo conforma Cristóbal Picón y Matías Lobos,
-                        estudiantes de 5to año de Ingeniería Civil Industrial de la universidad Adolfo Ibañez.</h4>
-                    <div class="flex-row">
+                        estudiantes de 5to año de Ingeniería Civil Industrial de la universidad Adolfo Ibañez.
+                    </h4>
+                    <div class="flex-row" id="nosotros-perfil">
                         <div class="flex-col">
                             <img src="src/assets/imgs/cristobal.png">
                             <p class="bold">Cristóbal Picón</p>
