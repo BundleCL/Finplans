@@ -1,12 +1,16 @@
 /* Estilo General */
 body {
   font-family: Lato;
-  height: 100%;   
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-content: center;
 }
-h1, h2, h3, h4, p{
+h1,
+h2,
+h3,
+h4,
+p {
   font-weight: normal;
 }
 h1 {
@@ -31,7 +35,7 @@ hr {
   border-color: rgb(0, 0, 0, 0.3);
 }
 button {
-  background-color: #006CFF;
+  background-color: #006cff;
   color: white;
   border-radius: 6px;
   border-style: none;
@@ -62,19 +66,20 @@ button {
   flex-grow: 1;
   gap: 3vw;
 }
-.navbar-right{
+.navbar-right {
   margin-left: 2vw;
 }
 
 .logo {
-  color: #132D7D;
+  color: #132d7d;
   font-family: Lato;
-  font-style: normal; 
+  font-style: normal;
   font-weight: 800;
   font-size: 5vh;
   line-height: 5vh;
   letter-spacing: -0.015em;
   text-decoration: none;
+  margin-right: 1rem;
 }
 
 .nav-item {
@@ -82,8 +87,45 @@ button {
   line-height: normal;
   line-height: 5vh;
   text-decoration: none;
-  color: #8A897C;
+  color: #8a897c;
 }
-.nav-item:hover{
+.nav-item:hover {
   color: #5c5b50;
+}
+
+.nav-icon {
+  margin: 1em;
+  width: 40px;
+}
+
+.nav-icon:after,
+.nav-icon:before,
+.nav-icon .menu-icon {
+  background-color: #000000;
+  border-radius: 3px;
+  content: "";
+  display: block;
+  height: 5px;
+  margin: 7px 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-icon:hover:before {
+  transform: translateY(12px) rotate(135deg);
+}
+
+.nav-icon:hover:after {
+  transform: translateY(-12px) rotate(-135deg);
+}
+
+.nav-icon:hover .menu-icon {
+  transform: scale(0);
+}
+
+/* Breakpoint at 800px: */
+@media screen and (max-width: 800px) {
+  .navbar-left,
+  .navbar-right {
+    display: none;
+  }
 }
