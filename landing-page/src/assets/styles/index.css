@@ -161,7 +161,10 @@
   padding-right: 3vw;
   padding-left: 3vw;
 }
-
+.row-2 img {
+  max-width: 16vw;
+  margin: 5vw;
+}
 /* Utilidades */
 .opacity08 {
   opacity: 0.8;
@@ -279,6 +282,30 @@
   }
   .col-2 img {
     width: 25vw;
+  }
+  #asi-de-facil,
+  .row-2 {
+    flex-flow: column nowrap;
+    padding: 0;
+  }
+  .row-2 img {
+    order: -1;
+    max-width: 16vw;
+    margin: 5vw;
+  }
+  .row-2 .number-circle {
+    order: 0;
+  }
+  .row-2 .left-align,
+  .row-2 .right-align {
+    order: 1;
+  }
+  .row-2 p {
+    width: auto;
+    text-align: center;
+  }
+  .row-2 img {
+    max-width: 40vw;
   }
   #testimonio {
     line-height: 2rem;

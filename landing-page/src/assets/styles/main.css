@@ -122,8 +122,15 @@ button {
   transform: scale(0);
 }
 
+.nav-icon {
+  display: none;
+}
+
 /* Breakpoint at 800px: */
 @media screen and (max-width: 800px) {
+  .nav-icon {
+    display: block;
+  }
   .navbar-left,
   .navbar-right {
     display: none;
