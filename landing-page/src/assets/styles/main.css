@@ -110,18 +110,6 @@ button {
   transition: all 0.2s ease-in-out;
 }
 
-.nav-icon:hover:before {
-  transform: translateY(12px) rotate(135deg);
-}
-
-.nav-icon:hover:after {
-  transform: translateY(-12px) rotate(-135deg);
-}
-
-.nav-icon:hover .menu-icon {
-  transform: scale(0);
-}
-
 .nav-icon {
   display: none;
 }
@@ -129,10 +117,39 @@ button {
 /* Breakpoint at 800px: */
 @media screen and (max-width: 800px) {
   .nav-icon {
-    display: block;
+    display: inline-block;
   }
-  .navbar-left,
-  .navbar-right {
+  .navbar .navbar-left,
+  .navbar .navbar-right,
+  .responsive-nav .navbar-right {
     display: none;
+  }
+  .responsive-nav {
+    background-color: #132d7d10;
+  }
+  .responsive-nav .nav-icon:before {
+    transform: translateY(12px) rotate(135deg);
+  }
+  .responsive-nav .nav-icon:after {
+    transform: translateY(-12px) rotate(-135deg);
+  }
+  .responsive-nav .menu-icon {
+    transform: scale(0);
+  }
+  .responsive-nav .navbar-left,
+  .responsive-nav .logo {
+    display: flex;
+    flex-direction: column;
+  }
+  .responsive-nav a.logo {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    display: inline;
+  }
+  .responsive-nav .navbar-left a {
+    margin: 1.2vh;
+    width: 100%;
+    color: #132d7d;
   }
 }

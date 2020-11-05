@@ -10,8 +10,8 @@
         <title>Finplans</title>
     </head>
     <body>
-        <div class="navbar">
-            <div class="nav-icon">
+        <div class="navbar" id="top-navbar">
+            <div class="nav-icon" onclick="myFunction()">
                 <div class="menu-icon"></div>
             </div>
             <a class="logo" href="#">FINPLANS</a>
@@ -155,4 +155,13 @@
         </div>
     </body>
 </html>
-
+<script>
+    function myFunction() {
+  var x = document.getElementById("top-navbar");
+  if (x.className === "navbar") {
+    x.className = "responsive-nav";
+  } else {
+    x.className = "navbar";
+  }
+}
+</script>
