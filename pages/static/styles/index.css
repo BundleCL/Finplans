@@ -106,6 +106,12 @@
   flex-flow: column;
   width: fit-content;
 }
+
+.col-1 {
+  padding: 1rem 3rem;
+  margin: 0 1rem;
+}
+
 .col-2 {
   align-items: center;
   width: 20vw;
