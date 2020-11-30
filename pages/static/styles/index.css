@@ -88,6 +88,10 @@
   padding-top: 5vh;
   align-items: center;
 }
+#register {
+  display: flex;
+  margin-left: 30vw;
+}
 
 /* Filas y columnas específicas */
 .flex-col {
@@ -172,6 +176,7 @@
   margin: 5vw;
 }
 /* Utilidades */
+
 .opacity08 {
   opacity: 0.8;
 }
@@ -205,7 +210,7 @@
 .form {
   width: 35vw;
   height: 60vh;
-  justify-content: space-evenly;
+  justify-content: space-between;
   border-style: solid;
   border-width: 1px;
   border-color: rgb(0, 0, 0, 0.5);
