@@ -90,7 +90,20 @@
 }
 #register {
   display: flex;
-  margin-left: 30vw;
+  margin: 0 auto;
+  flex-direction: column;
+}
+#register h4 {
+  text-align: center;
+  width: auto;
+}
+#register form.flex-col.form .flex-row input[type="text"] {
+  max-width: 40%;
+}
+#register form.flex-col.form button {
+  margin-top: 1vh;
+  width: 100%;
+  padding: 2vh;
 }
 
 /* Filas y columnas específicas */
@@ -333,15 +346,8 @@
     height: 30vh;
     justify-content: center;
   }
-  #solicita-tu-invitacion form {
-    width: 74vw;
-    height: auto;
-  }
-  #solicita-tu-invitacion form h3 {
-    text-align: center;
-  }
-  #solicita-tu-invitacion form button {
-    margin: 4vh auto 0vh;
+  #solicita-tu-invitacion a.button {
+    margin: 0 auto;
   }
   .col-4 {
     width: 80vw;
@@ -370,5 +376,16 @@
   }
   .contacto .social img {
     width: 10vw;
+  }
+  .flex-row {
+    flex-flow: column;
+  }
+  #register form {
+    width: auto;
+    margin: 0 auto;
+  }
+  #register form.flex-col.form .flex-row input[type="text"] {
+    max-width: 100%;
+    margin: 1.2vh 0;
   }
 }

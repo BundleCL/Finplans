@@ -75,7 +75,7 @@ hr {
 .navbar-left {
   display: flex;
   flex-flow: row wrap;
-  flex-grow: 4;
+  flex-grow: 2;
   gap: 3vw;
 }
 .navbar-right {
@@ -127,6 +127,10 @@ hr {
   display: none;
 }
 
+.center {
+  margin: 0 auto !important;
+}
+
 /* Breakpoint at 800px: */
 @media screen and (max-width: 800px) {
   .nav-icon {
@@ -143,7 +147,7 @@ hr {
     background-color: #132d7d10;
   }
   .responsive-nav .nav-icon:before {
-    transform: translateY(12px) rotate(135deg); 
+    transform: translateY(12px) rotate(135deg);
   }
   .responsive-nav .nav-icon:after {
     transform: translateY(-12px) rotate(-135deg);

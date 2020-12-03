@@ -15,11 +15,11 @@
             <div class="nav-icon" onclick="myFunction()">
                 <div class="menu-icon"></div>
             </div>
-            <a class="logo" href="#">FINPLANS</a>
+            <a class="logo" href="/">FINPLANS</a>
             <div class="navbar-left">
-                <a class="nav-item" href="#que-es-finplans">¿Qué es Finplans?</a>
-                <a class="nav-item" href="#asi-de-facil">Así de fácil</a>
-                <a class="nav-item" href="#nosotros">Nosotros</a>
+                <a class="nav-item" href="/#que-es-finplans">¿Qué es Finplans?</a>
+                <a class="nav-item" href="/#asi-de-facil">Así de fácil</a>
+                <a class="nav-item" href="/#nosotros">Nosotros</a>
             </div>
             <div class="navbar-right">
                 <a href="register" class="button">Unirse</a>
@@ -27,16 +27,19 @@
         </div>
         <div id="content">
             <div id="register">
-                <form action="#" method="get" class="flex-col form">
+                <h4>Regístrate para recibir más información</h4>
+                <form method="POST" class="flex-col form">
+                    {% csrf_token %}
                     <div class="flex-row">
-                        <input type="text" id="name" placeholder="Nombre">
-                        <input type="text" id="lastname" placeholder="Apellido">
+                        {{form.first_name}}
+                        {{form.last_name}}
                     </div><br>
-                    <input type="text" id="email" placeholder="Correo"><br>
-                    <input type="password" id="pwd" placeholder="Contraseña"><br>
-                    <input type="password" id="cpwd" placeholder="Confirma tu contraseña"><br><br>
-                    <a href="#" type="submit" class="button">Unirse</a>
+                    {{form.email}}<br>
+                    {{form.password1}}<br>
+                    {{form.password2}}<br>
+                    <button type="submit" class="button center">Unirse</button>
                 </form>
+                {{form.errors}}
             </div>
             <footer>
                 <div class="footer-row">
@@ -70,4 +73,10 @@
     x.className = "navbar";
   }
 }
+const form_fields = document.getElementsByTagName('input');
+form_fields[1].placeholder='Nombre';
+form_fields[2].placeholder='Apellido';
+form_fields[3].placeholder='Correo';
+form_fields[4].placeholder='Contraseña';
+form_fields[5].placeholder='Repite contraseña';
 </script>
