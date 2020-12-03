@@ -34,7 +34,7 @@ hr {
   border-width: 1px;
   border-color: rgb(0, 0, 0, 0.3);
 }
-button {
+/* button {
   background-color: #006cff;
   color: white;
   border-radius: 6px;
@@ -42,6 +42,18 @@ button {
   font-family: Montserrat;
   width: 130px;
   height: 40px;
+  text-align: center;
+} */
+.button {
+  background-color: #006cff;
+  color: white;
+  border-radius: 6px;
+  border-style: none;
+  font-family: Montserrat;
+  width: 60px;
+  text-align: center;
+  padding: 0.7em 2.3em;
+  text-decoration: none;
 }
 
 /* Navbar */
@@ -55,7 +67,7 @@ button {
   align-items: center;
   position: fixed;
   top: 0;
-  width: 90%;
+  width: 100%;
   background-color: white;
   z-index: 1;
 }
@@ -63,11 +75,12 @@ button {
 .navbar-left {
   display: flex;
   flex-flow: row wrap;
-  flex-grow: 1;
+  flex-grow: 2;
   gap: 3vw;
 }
 .navbar-right {
   margin-left: 2vw;
+  flex-grow: 1;
 }
 
 .logo {
@@ -114,6 +127,10 @@ button {
   display: none;
 }
 
+.center {
+  margin: 0 auto !important;
+}
+
 /* Breakpoint at 800px: */
 @media screen and (max-width: 800px) {
   .nav-icon {
@@ -125,6 +142,8 @@ button {
     display: none;
   }
   .responsive-nav {
+    position: sticky;
+    top: 0;
     background-color: #132d7d10;
   }
   .responsive-nav .nav-icon:before {
@@ -140,6 +159,7 @@ button {
   .responsive-nav .logo {
     display: flex;
     flex-direction: column;
+    margin-bottom: 2vh;
   }
   .responsive-nav a.logo {
     margin: 0 auto;
@@ -148,7 +168,8 @@ button {
     display: inline;
   }
   .responsive-nav .navbar-left a {
-    margin: 1.2vh;
+    margin-left: 3vh;
+    margin-bottom: 1.25vh;
     width: 100%;
     color: #132d7d;
   }

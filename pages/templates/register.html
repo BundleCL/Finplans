@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"><link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;900&display=swap" rel="stylesheet">        
+        {% load static %}
+        <link rel="stylesheet" type="text/css"href="{% static 'styles/main.css' %}"/>
+        <link rel="stylesheet" type="text/css"href="{% static 'styles/index.css' %}" />
+        <title>Finplans</title>
+    </head>
+    <body>
+        <div class="navbar" id="top-navbar">
+            <div class="nav-icon" onclick="myFunction()">
+                <div class="menu-icon"></div>
+            </div>
+            <a class="logo" href="/">FINPLANS</a>
+            <div class="navbar-left">
+                <a class="nav-item" href="/#que-es-finplans">¿Qué es Finplans?</a>
+                <a class="nav-item" href="/#asi-de-facil">Así de fácil</a>
+                <a class="nav-item" href="/#nosotros">Nosotros</a>
+            </div>
+            <div class="navbar-right">
+                <a href="register" class="button">Unirse</a>
+            </div>
+        </div>
+        <div id="content">
+            <div id="register">
+                <h4>Regístrate para recibir más información</h4>
+                <form method="POST" class="flex-col form">
+                    {% csrf_token %}
+                    <div class="flex-row">
+                        {{form.first_name}}
+                        {{form.last_name}}
+                    </div><br>
+                    {{form.email}}<br>
+                    {{form.password1}}<br>
+                    {{form.password2}}<br>
+                    <button type="submit" class="button center">Unirse</button>
+                </form>
+                {{form.errors}}
+            </div>
+            <footer>
+                <div class="footer-row">
+                    <a class="nav-item" href="#que-es-finplans">¿Qué es Finplans?</a>
+                    <a class="nav-item" href="#asi-de-facil">Así de fácil</a>
+                    <a class="logo" href="#">FINPLANS</a>
+                    <a class="nav-item" href="#solicita-tu-invitacion">Solicita tu invitación</a>
+                    <a class="nav-item" href="#nosotros">Nosotros</a>
+                </div>
+                <hr>
+                <div class="contacto flex-col">
+                    <p class="opacity08">contacto.finplans@gmail.com</p>
+                    <div class="flex-row social">
+                        <img src="{% static 'imgs/facebook.png' %}">
+                        <img src="{% static 'imgs/linkedin.png' %}">
+                        <img src="{% static 'imgs/instagram.png' %}">
+                    </div>
+                    <p class="opacity08">© Finplans, Inc. 2020.</p>
+                    <a href="https://stories.freepik.com/data">Illustration by Freepik Stories</a>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
+<script>
+    function myFunction() {
+  var x = document.getElementById("top-navbar");
+  if (x.className === "navbar") {
+    x.className = "responsive-nav";
+  } else {
+    x.className = "navbar";
+  }
+}
+const form_fields = document.getElementsByTagName('input');
+form_fields[1].placeholder='Nombre';
+form_fields[2].placeholder='Apellido';
+form_fields[3].placeholder='Correo';
+form_fields[4].placeholder='Contraseña';
+form_fields[5].placeholder='Repite contraseña';
+</script>

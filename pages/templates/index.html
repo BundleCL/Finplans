@@ -22,7 +22,7 @@
                 <a class="nav-item" href="#nosotros">Nosotros</a>
             </div>
             <div class="navbar-right">
-                <button href="#solicita-tu-invitacion">Unirse</button>
+                <a href="register" class="button center">Unirse</a>
             </div>
         </div>
         <div id="content">
@@ -30,7 +30,7 @@
                 <div class="col-1">
                     <h2>Te ayudamos a hacer tus objetivos financieros realidad</h1>
                     <h4>Nos preocupamos de tu ahorro y te acompañamos en el camino</h4>
-                    <button id="unirse" href="#solicita-tu-invitacion">Unirse</button>
+                    <a href="./register" class="button">Unirse</a>
                 </div>
                 <img src="{% static 'imgs/first-img.png' %}"/>
             </div>
@@ -101,16 +101,8 @@
                 <div class="flex-col col-3">
                     <h2>Solicita tu invitación</h2>
                     <h3 class="opacity08">Déjanos tu mail y serás el primero en enterarte del lanzamiento de Finplans</h3>
+                    <a href=src="{% url 'register' %}" class="button center">Unirse</a>
                 </div>
-                <form action="#" class="flex-col form">
-                    <h3>Quiero recibir información</h3>
-                    <div class="flex-row">
-                        <input type="text" id="name" placeholder="Nombre">
-                        <input type="text" id="lastname" placeholder="Apellido">
-                    </div>
-                    <input type="text" id="email" placeholder="Correo">
-                    <button type="submit">Enviar</button>
-                </form>
             </div>
             <div id="nosotros" class="flex-col">
                 <h2>Nosotros</h2>
