@@ -98,7 +98,7 @@
   width: auto;
 }
 #register form.flex-col.form .flex-row input[type="text"] {
-  max-width: 40%;
+  max-width: 38%;
 }
 #register form.flex-col.form button {
   margin-top: 1vh;
@@ -241,6 +241,10 @@
   font-size: 1.1rem;
   padding: 2vh;
 }
+.form .alert-danger {
+  color:  #ff0037;
+  text-align: center;
+}
 
 /* Footer */
 .footer-row {
@@ -373,6 +377,7 @@
   }
   .contacto .social {
     width: 70vw;
+    flex-flow: row;
   }
   .contacto .social img {
     width: 10vw;

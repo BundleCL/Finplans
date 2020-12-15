@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
-from .forms import SignUpForm
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from .forms import SignUpForm
 
 
 def index(request):
@@ -16,13 +18,26 @@ def register(request):
     print(form.errors)
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        if form.is_valid():
+        if (form.is_valid()):
             # form.save()
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password1')
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
-            user = User.objects.create_user(
-                username=email, email=email, password=password, first_name=first_name, last_name=last_name)
-            return redirect('index')
+            try:
+                form.check_mail(email)
+                user = User.objects.create_user(username=email, email=email, password=password,
+                first_name=first_name, last_name=last_name)
+                send_mail(
+                    'Nuevo usuario',
+                    f'Se ha registrado {user.first_name} {user.last_name}, {user.email} en Finplans',
+                    'contacto.finplans@gmail.com',
+                    [settings.EMAIL_HOST_USER],
+                    fail_silently=False,
+                )
+                #return redirect("https://docs.google.com/forms/d/e/1FAIpQLSfTVN6PxiaZkTKmPmZdFL86Hb_Tril-_pEBtM2gV5SePkKRMg/viewform?usp=sf_link")
+                return redirect('index')
+            except Exception as e:
+                print(e)
     return render(request, 'register.html', {'form': form})
+
