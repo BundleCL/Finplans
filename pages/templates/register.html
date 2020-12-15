@@ -38,8 +38,21 @@
                     {{form.password1}}<br>
                     {{form.password2}}<br>
                     <button type="submit" class="button center">Unirse</button>
+                    {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 </form>
-                {{form.errors}}
             </div>
             <footer>
                 <div class="footer-row">
