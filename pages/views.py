@@ -32,7 +32,7 @@ def register(request):
                     'Nuevo usuario',
                     f'Se ha registrado {user.first_name} {user.last_name}, {user.email} en Finplans',
                     'contacto.finplans@gmail.com',
-                    [settings.EMAIL_HOST_USER],
+                    ['contacto.finplans@gmail.com'],
                     fail_silently=False,
                 )
                 #return redirect("https://docs.google.com/forms/d/e/1FAIpQLSfTVN6PxiaZkTKmPmZdFL86Hb_Tril-_pEBtM2gV5SePkKRMg/viewform?usp=sf_link")
