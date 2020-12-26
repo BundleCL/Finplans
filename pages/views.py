@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .forms import SignUpForm
+from .forms import FinancialDataForm
 
 
 def index(request):
@@ -41,3 +42,9 @@ def register(request):
                 print(e)
     return render(request, 'register.html', {'form': form})
 
+def profile(request):
+    form = FinancialDataForm()
+
+    if request.method == 'POST':
+        form = FinancialDataForm(request.POST)
+    return render(request, 'profile.html', {'form': form})
