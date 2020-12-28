@@ -22,7 +22,12 @@
                 <a class="nav-item" href="#nosotros">Nosotros</a>
             </div>
             <div class="navbar-right">
+                {% if user.is_authenticated %}
+                <a href="profile" class="button">Perfil</a>
+                <a href="logout" class="button">Cerrar sesión</a>
+                {% else %}
                 <a href="register" class="button center">Unirse</a>
+                {% endif %}
             </div>
         </div>
         <div id="content">

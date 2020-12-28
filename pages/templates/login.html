@@ -22,22 +22,18 @@
                 <a class="nav-item" href="/#nosotros">Nosotros</a>
             </div>
             <div class="navbar-right">
-                <a href="login" class="button">Iniciar sesión</a>
+                <a href="register" class="button">Registrarse</a>
             </div>
         </div>
         <div id="content">
-            <div id="register" class="form-container">
-                <h4>Regístrate para recibir más información</h4>
+            <div id="login" class="form-container">
+                <h4>Bienvenido/a otra vez</h4>
                 <form method="POST" class="flex-col form">
                     {% csrf_token %}
-                    <div class="flex-row">
-                        {{form.first_name}}
-                        {{form.last_name}}
-                    </div><br>
-                    {{form.email}}<br>
-                    {{form.password1}}<br>
-                    {{form.password2}}<br>
-                    <button type="submit" class="button center">Unirse</button>
+                        {{form.username}}
+                        {{form.password}}<br>
+                    <br>
+                    <button type="submit" class="button">Iniciar sesión</button>
                     {% if form.errors %}
                         {% for field in form %}
                             {% for error in field.errors %}
@@ -87,9 +83,6 @@
   }
 }
 const form_fields = document.getElementsByTagName('input');
-form_fields[1].placeholder='Nombre';
-form_fields[2].placeholder='Apellido';
-form_fields[3].placeholder='Correo';
-form_fields[4].placeholder='Contraseña';
-form_fields[5].placeholder='Repite contraseña';
+form_fields[1].placeholder='Correo';
+form_fields[2].placeholder='Contraseña';
 </script>

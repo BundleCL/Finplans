@@ -1,26 +1,29 @@
 from django.http import HttpResponse
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as do_login
+from django.contrib.auth import logout as do_logout
 from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import SignUpForm
 from .forms import FinancialDataForm
 
 
 def index(request):
-    # return HttpResponse('<h1>Hello finplans</h1>')
     return render(request, 'index.html')
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('profile')
     form = SignUpForm()
 
-    print(form.errors)
+    #(form.errors)
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if (form.is_valid()):
-            # form.save()
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password1')
             first_name = form.cleaned_data.get('first_name')
@@ -36,6 +39,9 @@ def register(request):
                     ['contacto.finplans@gmail.com'],
                     fail_silently=False,
                 )
+                if user is not None:
+                    do_login(request, user)
+                    return redirect('profile')
                 #return redirect("https://docs.google.com/forms/d/e/1FAIpQLSfTVN6PxiaZkTKmPmZdFL86Hb_Tril-_pEBtM2gV5SePkKRMg/viewform?usp=sf_link")
                 return redirect('index')
             except Exception as e:
@@ -43,8 +49,28 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 
 def profile(request):
+    #if not request.user.is_authenticated:
+    #    return redirect('login')
     form = FinancialDataForm()
 
     if request.method == 'POST':
         form = FinancialDataForm(request.POST)
     return render(request, 'profile.html', {'form': form})
+
+def login(request):
+    form = AuthenticationForm()
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                do_login(request, user)
+                return redirect('profile')
+
+    return render(request, "login.html", {'form': form})
+
+def logout(request):
+    do_logout(request)
+    return redirect('index')

@@ -88,19 +88,19 @@
   padding-top: 5vh;
   align-items: center;
 }
-#register {
+.form-container {
   display: flex;
   margin: 0 auto;
   flex-direction: column;
 }
-#register h4 {
+.form-container h4 {
   text-align: center;
   width: auto;
 }
 #register form.flex-col.form .flex-row input[type="text"] {
   max-width: 38%;
 }
-#register form.flex-col.form button {
+.form-container form.flex-col.form button {
   margin-top: 1vh;
   width: 100%;
   padding: 2vh;
@@ -385,12 +385,15 @@
   .flex-row {
     flex-flow: column;
   }
-  #register form {
+  .form-container form {
     width: auto;
     margin: 0 auto;
   }
-  #register form.flex-col.form .flex-row input[type="text"] {
+  .form-container form.flex-col.form .flex-row input[type="text"] {
     max-width: 100%;
     margin: 1.2vh 0;
+  }
+  #register form.flex-col.form .flex-row input[type="text"] {
+    max-width: 100%;
   }
 }
