@@ -7,9 +7,11 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm
 from .forms import FinancialDataForm
-from .models import Financial
+from .models import Financial, Option
+from .optimize import solve
 
 
 def index(request):
@@ -48,16 +50,28 @@ def register(request):
                 print(e)
     return render(request, 'register.html', {'form': form})
 
+@login_required(login_url='login')
 def profile(request):
-    #if not request.user.is_authenticated:
-    #    return redirect('login')
+    #mostrar form solo si no lo ha llenado --pending
     form = FinancialDataForm()
-
     if request.method == 'POST':
         form = FinancialDataForm(request.POST)
-        #if (form.is_valid()): ver como guardar con foreign key de request.user
-            #form.save()
+        if (form.is_valid()):
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            return redirect('results')
+
     return render(request, 'profile.html', {'form': form})
+
+@login_required(login_url='login')
+def results(request):
+    #filtrar usuario para ver datos ingresados
+    # reemplazar datos desde solver
+    res_1 = {}
+    res_2 = {}
+    res_3 = {}
+    return render(request, "results.html", {'res_1': res_1, 'res_2': res_2, 'res_3': res_3})
 
 def login(request):
     form = AuthenticationForm()

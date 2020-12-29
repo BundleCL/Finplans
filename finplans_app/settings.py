@@ -138,4 +138,4 @@ EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))
 COMPRESS_OFFLINE = os.environ.get('COMPRESS_OFFLINE', True)
 
 # Activate Django-Heroku.
-# django_heroku.settings(locals())
+django_heroku.settings(locals())

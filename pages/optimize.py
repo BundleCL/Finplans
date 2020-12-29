@@ -35,6 +35,7 @@ def fact(meta, plazo, DD, Gm, F):
                     '%otrosgastos':0,
                     '%fondoemergencia':0  
     }
+    resultados['plazo'] = plazo
     for var_name, var in model.variables.iteritems():
         #print(var_name, "=", round(var.primal * DD))
         resultados[var_name] = round(var.primal*DD)
@@ -78,6 +79,7 @@ def tiempo(meta, DD, Gm, F):
         #print("objective value:", model.objective.value)
         #print("----------")
         resultados = {}
+        resultados['plazo'] = plazo
         for var_name, var in model.variables.iteritems():
             #print(var_name, "=", round(var.primal * DD))
             resultados[var_name] = round(var.primal*DD)
@@ -117,6 +119,7 @@ def costos(meta, plazo, DD, Gm, F):
     #print("objective value:", model.objective.value)
     #print("----------")
     resultados = {}
+    resultados['plazo'] = plazo
     for var_name, var in model.variables.iteritems():
         #print(var_name, "=", round(var.primal * DD))
         resultados[var_name] = round(var.primal*DD)

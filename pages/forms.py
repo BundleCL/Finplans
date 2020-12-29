@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Option
+from .models import Option, Financial
+from .constants import OBJ_CHOICES, ALERT_TYPES, COMM_TYPE
 
 
 class SignUpForm(UserCreationForm):
@@ -44,18 +45,6 @@ class FinancialDataForm(forms.ModelForm):
 
     # Entertainment expenses
     entertainment_expenses = forms.IntegerField(min_value=0)
-
-    OBJ_CHOICES = [
-        (0, 'Comprar un departamento o casa'),
-        (1, 'Pagar mi educación'),
-        (2, 'Viajar'),
-        (3, 'Emprender un negocio o nuevo proyecto'),
-        (4, 'Para mi jubilación'),
-        (5, 'Invertir mi dinero'),
-        (6, 'Pagar algún tipo de seguro o deuda'),
-        (7, 'Otro objetivo de ahorro'),
-        (8, 'No tengo ningún objetivo de ahorro en mente')
-    ] 
     objective = forms.ChoiceField(choices=OBJ_CHOICES)
     obj_savings = forms.IntegerField(min_value=0)
     obj_months = forms.IntegerField(min_value=0)
@@ -63,25 +52,13 @@ class FinancialDataForm(forms.ModelForm):
     emergency_fund = forms.IntegerField(min_value=0)
 
     alert_freq = forms.IntegerField(min_value=0)
-    ALERT_TYPES = [
-        (0, 'Saldo bajo en cuenta'),
-        (1, 'Movimientos duplicados'),
-        (2, 'Resumen semanal de tu control financiero'),
-        (3, 'Resumen mensual de tu control financiero'),
-        (4, 'Proyección del ahorro'),
-        (5, 'Dinero restante por cumplir la cuota mensual de ahorro')
-    ]
     alert_type = forms.ChoiceField(choices=ALERT_TYPES)
-    COMM_TYPE = [
-        (0, 'Whatsapp'),
-        (1, 'Email')
-    ]
     media = forms.ChoiceField(choices=COMM_TYPE)
 
     phone_number = forms.CharField()
 
     class Meta:
-        model = User
+        model = Financial
         fields = ('fixed_income', 'fixed_income2', 'fixed_income3', 'extra_income',
         'food_expenses', 'transport_expenses', 'health_expenses', 'education_expenses',
         'clothing_expenses', 'subscription_expenses',
