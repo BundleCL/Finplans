@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"><link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;900&display=swap" rel="stylesheet">        
+        {% load static %}
+        <link rel="stylesheet" type="text/css"href="{% static 'styles/main.css' %}"/>
+        <link rel="stylesheet" type="text/css"href="{% static 'styles/index.css' %}" />
+        <title>Finplans</title>
+    </head>
+    <body>
+        <div class="navbar" id="top-navbar">
+            <div class="nav-icon" onclick="myFunction()">
+                <div class="menu-icon"></div>
+            </div>
+            <a class="logo" href="/">FINPLANS</a>
+            <div class="navbar-left">
+                <a class="nav-item" href="/#que-es-finplans">¿Qué es Finplans?</a>
+                <a class="nav-item" href="/#asi-de-facil">Así de fácil</a>
+                <a class="nav-item" href="/#nosotros">Nosotros</a>
+            </div>
+            <div class="navbar-right">
+                {% if user.is_authenticated %}
+                <a href="logout" class="button">Cerrar sesión</a>
+                {% else %}
+                <a href="register" class="button center">Unirse</a>
+                {% endif %}
+            </div>
+        </div>
+        <div id="content">
+            <div class="form-container">
+                <h4>Para ayudarte, necesitamos algunos datos financieros</h4>
+                <form method="POST" class="flex-col form">
+                    {% csrf_token %}
+                    <p>Ingreso Fijo</p>
+                    {{form.fixed_income}}<br>
+                    <p>Si cuentas con otra fuente de ingreso fija, agrégala aquí.</p>
+                    {{form.fixed_income2}}<br>
+                    <p>Si cuentas con otra fuente de ingreso fija, agrégala aquí.</p>
+                    {{form.fixed_income3}}<br>
+                    <p>¿Tienes una fuente de ingreso adicional? Como arriendos o bonos. ¡Agrégalo aquí!</p>
+                    {{form.extra_income}}<br>
+
+                    <p>Agrega cuánto gastas en comida mensualmente (supermercado). ¡No consideres las salidas a comer a restaurantes o delivery!
+                    </p>
+                    {{form.food_expenses}}<br>
+                    <p>Agrega tus costos mensuales en transporte, ya sea bencina, Uber, micro, metro.</p>
+                    {{form.transport_expenses}}<br>
+                    <p>Agrega los gastos que tienes en salud, por ejemplo medicamentos, tratamientos.</p>
+                    {{form.health_expenses}}<br>
+                    <p>Agrega tus costos en educación, ya sea material de estudio, universidad, etc.</p>
+                    {{form.education_expenses}}<br>
+                    <p>¡Agrega tus gastos que tienes en ropa!</p>
+                    {{form.clothing_expenses}}<br>
+                    <p>¡Agrega tus gastos que tienes en suscripciones! Por ejemplo Netflix, Spotify, etc.</p>
+                    {{form.subscription_expenses}}<br>
+
+                    <p>Agrega tus gastos de arriendo o dividendo de tu casa o departamento.</p>
+                    {{form.rent_expenses}}<br>
+                    <p>Agrega tus gastos comunes de tu edificio o condominio.</p>
+                    {{form.common_expenses}}<br>
+                    <p>Agrega tus gastos de cuentas como luz, agua y gas.</p>
+                    {{form.billing_expenses}}<br>
+                    <p>Agrega tus gastos de celular, cable e internet.</p>
+                    {{form.phone_cable_internet_expenses}}<br>
+                    <p>Agrega tus gastos en seguros, por ejemplo seguros de salud, del auto, de vida y de hogar.</p>
+                    {{form.insurance_expenses}}<br>
+
+                    <p>¡Agrega tus gastos que tienes en bares, restaurantes o salidas con tu polola!</p>
+                    {{form.entertainment_expenses}}<br>
+
+                    <p>¿Cuál es tu objetivo de ahorro? Elige el más importante que debes cumplir.</p>
+                    {{form.objective}}<br>
+                    <p>Cuéntanos cuánto quieres ahorrar para cumplir tu objetivo de ahorro.</p>
+                    {{form.obj_savings}}<br>
+                    <p>En qué tiempo deseas cumplir esta meta (el plazo anótalo en meses).</p>
+                    {{form.obj_months}}<br>
+                    <p>¿Cuánto dinero deseas tener para otros gastos? Me refiero al dinero que quieres dejarte para ti, sin contar tus costos fijos.</p>
+                    {{form.extra_expenses}}<br>
+                    <p>¿Deseas tener un fondo de emergencia? Para cualquier eventualidad. En caso de ser así, ¡agrégalo aquí!</p>
+                    {{form.emergency_fund}}<br>
+                    <p>¿Con qué frecuencia deseas tener las alertas y notificaciones a tu correo o Whatsapp a partir de información tuya financiera (semanal)?</p>
+                    {{form.alert_freq}}<br>
+                    <p>¿Qué tipo de alerta o seguimiento deseas obtener a tu correos con respecto a tu ahorro o tus finanzas personales?</p>
+                    {{form.alert_type}}<br>
+                    <p>Medio de comunicación donde se enviará la información</p>
+                    {{form.media}}<br>
+                    <p>¡Déjanos tu número de teléfono para poder comunicarnos y ayudarte con tu ahorro!</p>
+                    {{form.phone_number}}<br>
+                    <br>
+                    <button type="submit" class="button center">Unirse</button>
+                    {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                </form>
+            </div>
+            <footer>
+                <div class="footer-row">
+                    <a class="nav-item" href="#que-es-finplans">¿Qué es Finplans?</a>
+                    <a class="nav-item" href="#asi-de-facil">Así de fácil</a>
+                    <a class="logo" href="#">FINPLANS</a>
+                    <a class="nav-item" href="#solicita-tu-invitacion">Solicita tu invitación</a>
+                    <a class="nav-item" href="#nosotros">Nosotros</a>
+                </div>
+                <hr>
+                <div class="contacto flex-col">
+                    <p class="opacity08">contacto.finplans@gmail.com</p>
+                    <div class="flex-row social">
+                        <img src="{% static 'imgs/facebook.png' %}">
+                        <img src="{% static 'imgs/linkedin.png' %}">
+                        <img src="{% static 'imgs/instagram.png' %}">
+                    </div>
+                    <p class="opacity08">© Finplans, Inc. 2020.</p>
+                    <a href="https://stories.freepik.com/data">Illustration by Freepik Stories</a>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
+<script>
+    function myFunction() {
+  var x = document.getElementById("top-navbar");
+  if (x.className === "navbar") {
+    x.className = "responsive-nav";
+  } else {
+    x.className = "navbar";
+  }
+}
+
+</script>

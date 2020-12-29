@@ -1,5 +1,5 @@
 from optlang import Model, Variable, Constraint, Objective
-from models import Option
+from .models import Option
 
 #parametro de prioridad (?)
 #tiempo = 1

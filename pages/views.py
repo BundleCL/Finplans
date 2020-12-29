@@ -20,7 +20,7 @@ def index(request):
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect('profile')
+        return redirect('survey')
     form = SignUpForm()
     
     if request.method == 'POST':
@@ -43,7 +43,7 @@ def register(request):
                 )
                 if user is not None:
                     do_login(request, user)
-                    return redirect('profile')
+                    return redirect('survey')
                 #return redirect("https://docs.google.com/forms/d/e/1FAIpQLSfTVN6PxiaZkTKmPmZdFL86Hb_Tril-_pEBtM2gV5SePkKRMg/viewform?usp=sf_link")
                 return redirect('index')
             except Exception as e:
@@ -51,8 +51,7 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 
 @login_required(login_url='login')
-def profile(request):
-    #mostrar form solo si no lo ha llenado --pending
+def survey(request):
     form = FinancialDataForm()
     if request.method == 'POST':
         form = FinancialDataForm(request.POST)
@@ -60,18 +59,20 @@ def profile(request):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
-            return redirect('results')
+            return redirect('index') #profile --pending
 
-    return render(request, 'profile.html', {'form': form})
+    return render(request, 'survey.html', {'form': form})
 
 @login_required(login_url='login')
-def results(request):
+def profile(request):
+    if not request.user.financial_set.first():
+        return redirect('survey')
     #filtrar usuario para ver datos ingresados
     # reemplazar datos desde solver
     res_1 = {}
     res_2 = {}
     res_3 = {}
-    return render(request, "results.html", {'res_1': res_1, 'res_2': res_2, 'res_3': res_3})
+    return render(request, "profile.html", {'res_1': res_1, 'res_2': res_2, 'res_3': res_3})
 
 def login(request):
     form = AuthenticationForm()
@@ -83,7 +84,7 @@ def login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 do_login(request, user)
-                return redirect('profile')
+                return redirect('survey')
 
     return render(request, "login.html", {'form': form})
 

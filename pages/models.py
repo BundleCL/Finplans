@@ -32,7 +32,7 @@ class Financial(models.Model):
     alert_freq = models.IntegerField()
     alert_type = models.CharField(max_length = 100, choices = ALERT_TYPES)
     media = models.CharField(max_length = 20, choices = COMM_TYPE) 
-    phone_number = models.CharField()
+    phone_number = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Option(models.Model):
