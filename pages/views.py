@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import SignUpForm
 from .forms import FinancialDataForm
+from .models import Financial
 
 
 def index(request):
@@ -19,8 +20,7 @@ def register(request):
     if request.user.is_authenticated:
         return redirect('profile')
     form = SignUpForm()
-
-    #(form.errors)
+    
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if (form.is_valid()):
@@ -55,6 +55,8 @@ def profile(request):
 
     if request.method == 'POST':
         form = FinancialDataForm(request.POST)
+        #if (form.is_valid()): ver como guardar con foreign key de request.user
+            #form.save()
     return render(request, 'profile.html', {'form': form})
 
 def login(request):
