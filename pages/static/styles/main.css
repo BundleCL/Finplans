@@ -134,6 +134,15 @@ hr {
   width: auto;
 }
 
+.user-option {
+  margin-bottom: 3rem;
+  font-size: 1.25rem;
+}
+
+.dashboard {
+  justify-content: space-between;
+}
+
 /* Breakpoint at 800px: */
 @media screen and (max-width: 800px) {
   .nav-icon {

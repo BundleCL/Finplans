@@ -8,6 +8,8 @@
         {% load static %}
         <link rel="stylesheet" type="text/css"href="{% static 'styles/main.css' %}"/>
         <link rel="stylesheet" type="text/css"href="{% static 'styles/index.css' %}" />
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
         <title>Finplans</title>
     </head>
     <body>
@@ -29,9 +31,14 @@
                 {% endif %}
             </div>
         </div>
-        <div id="content">
+        <div id="content" class="flex">
             <h3>Hola {{user.first_name|add:" "|add:user.last_name}}</h3>
-            <div>{{ user_option }}</div>
+            <div class="user-option">{{ user_option }}</div> <br>
+            <div class="dashboard">
+                <div id="goal-bar"></div>
+                <div id="dd-bar"></div>
+                <div id="exp-pie"></div>
+            </div>
             <footer>
                 <div class="footer-row">
                     <a class="nav-item" href="#que-es-finplans">¿Qué es Finplans?</a>
@@ -64,5 +71,10 @@
     x.className = "navbar";
   }
 }
-
+Highcharts.setOptions({
+    lang: { thousandsSep: '.' }
+});
+Highcharts.chart('goal-bar', {{ bars_goal_data|safe }});
+Highcharts.chart('dd-bar', {{ bars_dd_data|safe }});
+Highcharts.chart('exp-pie', {{ pie_expenses_data|safe }});
 </script>

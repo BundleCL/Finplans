@@ -100,10 +100,18 @@ def results(request):
 
 @login_required(login_url='login')
 def profile(request):
-    if not request.user.financial_set.first():
+    financial_info = request.user.financial_set.first()
+    if not financial_info: # si no llena encuesta
         return redirect('survey')
     user_option = request.user.option_set.first()
-    data = {'user_option': user_option}
+    if not user_option: # si no tiene opcion elegida
+        return redirect('results')
+
+    pie_expenses_data = financial_info.pie_expenses_data()
+    bars_dd_data = financial_info.bars_dd_data()
+    bars_goal_data = user_option.bars_goal_data()
+    data = {'user_option': user_option, 'bars_dd_data': bars_dd_data,
+            'pie_expenses_data': pie_expenses_data, 'bars_goal_data': bars_goal_data}
     return render(request, "profile.html", data)
 
 def login(request):
