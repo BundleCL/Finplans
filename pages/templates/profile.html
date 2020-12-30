@@ -30,25 +30,8 @@
             </div>
         </div>
         <div id="content">
-            <div class="results">
-                <form>
-                    <div>
-                        <input type="radio" name="option" id="option1" value="1">
-                        Ahorrando mensual $ {{res_1['%ahorro']}}, lograrás
-                            ahorrar $ {{res_1['%ahorro']*res_1['plazo']}} . <br>
-                    </div>
-                    <div>
-                        <input type="radio" name="option" id="option2" value="2">
-                        Ahorrando mensual $ {{res_2['%ahorro']}}, lograrás
-                            ahorrar $ {{res_2['%ahorro']*res_2['plazo']}} . <br>
-                    </div>
-                    <div>
-                        <input type="radio" name="option" id="option3" value="3">
-                        Ahorrando mensual $ {{res_3['%ahorro']}}, lograrás
-                            ahorrar $ {{res_3['%ahorro']*res_3['plazo']}} . <br>
-                    </div>
-                </form>
-            </div>
+            <h3>Hola {{user.first_name|add:" "|add:user.last_name}}</h3>
+            <div>{{ user_option }}</div>
             <footer>
                 <div class="footer-row">
                     <a class="nav-item" href="#que-es-finplans">¿Qué es Finplans?</a>

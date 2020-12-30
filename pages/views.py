@@ -52,6 +52,9 @@ def register(request):
 
 @login_required(login_url='login')
 def survey(request):
+    financial_info = request.user.financial_set.first()
+    if financial_info: # si no llena encuesta
+        return redirect('results')
     form = FinancialDataForm()
     if request.method == 'POST':
         form = FinancialDataForm(request.POST)
@@ -59,20 +62,49 @@ def survey(request):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
-            return redirect('index') #profile --pending
+            return redirect('results')
 
     return render(request, 'survey.html', {'form': form})
+
+@login_required(login_url='login')
+def results(request):
+    financial_info = request.user.financial_set.first()
+    if not financial_info: # si no llena encuesta
+        return redirect('survey')
+    if request.user.option_set.first(): # si ya tiene opcion elegida
+        return redirect('profile')
+    # reemplazar datos desde solver
+    meta, plazo = financial_info.get_meta(), financial_info.get_plazo()
+    DD, Gm, F = financial_info.get_DD(), financial_info.get_Gm(), financial_info.get_F()
+    solver_data = solve(meta, plazo, DD, Gm, F)
+        #enviar formulario
+    if request.method == 'POST':
+        value = request.POST['option']
+        # ver opcion elegida
+        if value == "1":
+            d = solver_data['res_1']
+        elif value == "2":
+            d = solver_data['res_2']
+        else:
+            d = solver_data['res_3']
+        print('-----------------------------------')
+        print(d)
+        #crear opcion
+        option = Option.objects.create(user=request.user, saving=d['saving'],
+        other=d['other'], emergency=d['emergency'], months=d['months'])
+        option.save()
+        if option:
+            return redirect('profile')
+    
+    return render(request, "results.html", solver_data)
 
 @login_required(login_url='login')
 def profile(request):
     if not request.user.financial_set.first():
         return redirect('survey')
-    #filtrar usuario para ver datos ingresados
-    # reemplazar datos desde solver
-    res_1 = {}
-    res_2 = {}
-    res_3 = {}
-    return render(request, "profile.html", {'res_1': res_1, 'res_2': res_2, 'res_3': res_3})
+    user_option = request.user.option_set.first()
+    data = {'user_option': user_option}
+    return render(request, "profile.html", data)
 
 def login(request):
     form = AuthenticationForm()
@@ -84,7 +116,7 @@ def login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 do_login(request, user)
-                return redirect('survey')
+                return redirect('profile')
 
     return render(request, "login.html", {'form': form})
 

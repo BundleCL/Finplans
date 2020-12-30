@@ -131,6 +131,7 @@ hr {
 
 .center {
   margin: 0 auto !important;
+  width: auto;
 }
 
 /* Breakpoint at 800px: */

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;900&display=swap" rel="stylesheet" />
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/index.css' %}" />
+    <title>Finplans</title>
+</head>
+
+<body>
+    <div class="navbar" id="top-navbar">
+        <div class="nav-icon" onclick="myFunction()">
+            <div class="menu-icon"></div>
+        </div>
+        <a class="logo" href="/">FINPLANS</a>
+        <div class="navbar-left">
+            <a class="nav-item" href="/#que-es-finplans">¿Qué es Finplans?</a>
+            <a class="nav-item" href="/#asi-de-facil">Así de fácil</a>
+            <a class="nav-item" href="/#nosotros">Nosotros</a>
+        </div>
+        <div class="navbar-right">
+            {% if user.is_authenticated %}
+            <a href="logout" class="button">Cerrar sesión</a>
+            {% else %}
+            <a href="register" class="button center">Unirse</a>
+            {% endif %}
+        </div>
+    </div>
+    <div id="content">
+        <div class="results form-container">
+            <form method="POST" class="form">
+                <p>Elige el plan que más te acomode</p>
+                {% csrf_token %}
+                <fieldset class="results-options">
+                    <ul>
+                        <li>
+                            {% if res_1.status != "optimal" %}
+                            <input type="radio" id="option1" name="option" value="1" required />
+                            <label for="option1">
+                                Ahorrando mensual $ {{res_1.saving}}, lograrás ahorrar $ {{res_1.total}}.
+                                Para otros gastos tendrías disponible mensual $ {{res_1.other}}.
+                                En {{res_1.months}} meses.<br />
+                            </label>
+                            {% else %}
+                            <p>La meta no es factible</p>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if res_2.status != "optimal" %}
+                            <input type="radio" id="option2" name="option" value="2" />
+                            <label for="option2">
+                                Ahorrando mensual $ {{res_2.saving}}, lograrás ahorrar $ {{res_2.total}}.
+                                Para otros gastos tendrías disponible mensual $ {{res_2.other}}.
+                                En {{res_2.months}} meses.<br />
+                            </label>
+                            {% else %}
+                            <p>La meta no es factible</p>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if res_3.status != "optimal" %}
+                            <input type="radio" id="option3" name="option" value="3" />
+                            <label for="option3">
+                                Ahorrando mensual $ {{res_3.saving}}, lograrás ahorrar $ {{res_3.total}}.
+                                Para otros gastos tendrías disponible mensual $ {{res_3.other}}.
+                                En {{res_3.months}} meses.<br />
+                            </label>
+                            {% else %}
+                            <p>La meta no es factible</p>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </fieldset>
+                <button type="submit" class="button center">Guardar meta</button>
+            </form>
+        </div>
+        <footer>
+            <div class="footer-row">
+                <a class="nav-item" href="#que-es-finplans">¿Qué es Finplans?</a>
+                <a class="nav-item" href="#asi-de-facil">Así de fácil</a>
+                <a class="logo" href="#">FINPLANS</a>
+                <a class="nav-item" href="#solicita-tu-invitacion">Solicita tu invitación</a>
+                <a class="nav-item" href="#nosotros">Nosotros</a>
+            </div>
+            <hr />
+            <div class="contacto flex-col">
+                <p class="opacity08">contacto.finplans@gmail.com</p>
+                <div class="flex-row social">
+                    <img src="{% static 'imgs/facebook.png' %}" />
+                    <img src="{% static 'imgs/linkedin.png' %}" />
+                    <img src="{% static 'imgs/instagram.png' %}" />
+                </div>
+                <p class="opacity08">© Finplans, Inc. 2020.</p>
+                <a href="https://stories.freepik.com/data">Illustration by Freepik Stories</a>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
+<script>
+    function myFunction() {
+        var x = document.getElementById("top-navbar");
+        if (x.className === "navbar") {
+            x.className = "responsive-nav";
+        } else {
+            x.className = "navbar";
+        }
+    }
+</script>

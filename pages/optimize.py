@@ -1,9 +1,6 @@
 from optlang import Model, Variable, Constraint, Objective
 from .models import Option
 
-#parametro de prioridad (?)
-#tiempo = 1
-#costos = 2
 
 def fact(meta, plazo, DD, Gm, F):
     # All the (symbolic) variables are declared, with a name and optionally a lower and/or upper bound.
@@ -27,20 +24,14 @@ def fact(meta, plazo, DD, Gm, F):
     model.add([c1, c2, c3, c4])
 
     status = model.optimize()
-
     #print("status:", model.status)
     #print("objective value:", model.objective.value)
     #print("----------")
-    resultados = {'%ahorro':0,
-                    '%otrosgastos':0,
-                    '%fondoemergencia':0  
-    }
-    resultados['plazo'] = plazo
+    resultados = {'%ahorro':0, '%otrosgastos':0, '%fondoemergencia':0, 'status': status, 'months':plazo}
     for var_name, var in model.variables.iteritems():
         #print(var_name, "=", round(var.primal * DD))
         resultados[var_name] = round(var.primal*DD)
-    print(model.status)
-    
+
     if model.status == 'optimal':  
         print('Opcion 1:')
         print('Ahorrando mensual',resultados['%ahorro'],', lograras ahorrar',resultados['%ahorro']*plazo)
@@ -49,6 +40,10 @@ def fact(meta, plazo, DD, Gm, F):
     else:
         print('La meta no es factible con las condiciones dadas:')
         print('Con',DD,'disponible, ahorrar',meta,'en',plazo,'meses, con',Gm,'mínimo para otros gastos.')
+    resultados['saving'] = resultados['%ahorro']
+    resultados['other'] = resultados['%otrosgastos']
+    resultados['emergency'] = resultados['%fondoemergencia']
+    resultados['total'] = resultados['%ahorro'] * plazo
     return resultados
 
 def tiempo(meta, DD, Gm, F):
@@ -64,22 +59,15 @@ def tiempo(meta, DD, Gm, F):
     #El % de ahorro * dinero disponible * el plazo debe ser estrictamente igual a la meta
         c3 = Constraint(a * DD * plazo, lb=meta, ub=meta)
         c4 = Constraint(f, lb=F, ub=F)
-
     # An objective can be formulated
         obj = Objective(a * DD * plazo, direction='max')
-
     # Variables, constraints and objective are combined in a Model object, which can subsequently be optimized.
         model = Model(name='Simple model')
         model.objective = obj
         model.add([c1, c2, c3, c4])
 
         status = model.optimize()
-
-        #print("status:", model.status)
-        #print("objective value:", model.objective.value)
-        #print("----------")
-        resultados = {}
-        resultados['plazo'] = plazo
+        resultados = {'status': status, 'months': plazo}
         for var_name, var in model.variables.iteritems():
             #print(var_name, "=", round(var.primal * DD))
             resultados[var_name] = round(var.primal*DD)
@@ -90,6 +78,10 @@ def tiempo(meta, DD, Gm, F):
             print('En',plazo,'meses')
             break
         plazo +=1  
+    resultados['saving'] = resultados['%ahorro']
+    resultados['other'] = resultados['%otrosgastos']
+    resultados['emergency'] = resultados['%fondoemergencia']
+    resultados['total'] = resultados['%ahorro'] * plazo
     return resultados
 
 
@@ -114,12 +106,8 @@ def costos(meta, plazo, DD, Gm, F):
     model.add([c1, c2, c3, c4])
 
     status = model.optimize()
+    resultados = {'status': status, 'months': plazo}
 
-    #print("status:", model.status)
-    #print("objective value:", model.objective.value)
-    #print("----------")
-    resultados = {}
-    resultados['plazo'] = plazo
     for var_name, var in model.variables.iteritems():
         #print(var_name, "=", round(var.primal * DD))
         resultados[var_name] = round(var.primal*DD)
@@ -131,6 +119,10 @@ def costos(meta, plazo, DD, Gm, F):
     else:
         print('La meta no es factible con las condiciones dadas:')
         print('Con',DD,'disponible, ahorrar',meta,'en',plazo,'meses, con',Gm,'mínimo para otros gastos.')
+    resultados['saving'] = resultados['%ahorro']
+    resultados['other'] = resultados['%otrosgastos']
+    resultados['emergency'] = resultados['%fondoemergencia']
+    resultados['total'] = resultados['%ahorro'] * plazo
     return resultados
 
 # solver

@@ -35,6 +35,27 @@ class Financial(models.Model):
     phone_number = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def get_meta(self):
+        return self.obj_savings
+    
+    def get_plazo(self):
+        return self.obj_months
+
+    def get_DD(self):
+        income = self.fixed_income + self.fixed_income2 + self.fixed_income3 + self.extra_income
+        expenses = (self.food_expenses + self.transport_expenses + self.health_expenses +
+        self.education_expenses + self.clothing_expenses + self.subscription_expenses +
+        self.rent_expenses + self.common_expenses + self.billing_expenses +
+        self.phone_cable_internet_expenses + self.insurance_expenses + self.entertainment_expenses)
+        return income - expenses
+    
+    def get_Gm(self):
+        return self.extra_expenses
+
+    def get_F(self):
+        return self.emergency_fund
+
+
 class Option(models.Model):
     saving = models.IntegerField()
     other = models.IntegerField()
@@ -43,5 +64,6 @@ class Option(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Ahorro: %s, Fondo emergencia %s, Otros: %s y Plazo: %s" % (
+        return "Tu meta de ahorro es $ %s, Fondo emergencia %s, \
+            Otros gastos: %s en un plazo de %s meses" % (
             self.saving, self.emergency, self.other, self.months)
