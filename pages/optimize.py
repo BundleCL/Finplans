@@ -31,7 +31,6 @@ def fact(meta, plazo, DD, Gm, F):
     for var_name, var in model.variables.iteritems():
         #print(var_name, "=", round(var.primal * DD))
         resultados[var_name] = round(var.primal*DD)
-
     if model.status == 'optimal':  
         print('Opcion 1:')
         print('Ahorrando mensual',resultados['%ahorro'],', lograras ahorrar',resultados['%ahorro']*plazo)
@@ -44,6 +43,10 @@ def fact(meta, plazo, DD, Gm, F):
     resultados['other'] = resultados['%otrosgastos']
     resultados['emergency'] = resultados['%fondoemergencia']
     resultados['total'] = resultados['%ahorro'] * plazo
+    resultados['msg'] = "Ahorrando mensual $ " + '{:,}'.format(resultados['saving']).replace(",",".") \
+        + " , lograrás ahorrar $ " + '{:,}'.format(resultados['total']).replace(",",".") \
+        + ". Para otros gastos tendrías disponible mensual $ " \
+        + '{:,}'.format(resultados['emergency']).replace(",",".") + " en "+str(resultados['months']) + " meses."
     return resultados
 
 def tiempo(meta, DD, Gm, F):
@@ -82,6 +85,10 @@ def tiempo(meta, DD, Gm, F):
     resultados['other'] = resultados['%otrosgastos']
     resultados['emergency'] = resultados['%fondoemergencia']
     resultados['total'] = resultados['%ahorro'] * plazo
+    resultados['msg'] = "Ahorrando mensual $ " + '{:,}'.format(resultados['saving']).replace(",",".") \
+        + " , lograrás ahorrar $ " + '{:,}'.format(resultados['total']).replace(",",".") \
+        + ". Para otros gastos tendrías disponible mensual $ " \
+        + '{:,}'.format(resultados['emergency']).replace(",",".") + " en "+str(resultados['months']) + " meses."
     return resultados
 
 
@@ -123,6 +130,10 @@ def costos(meta, plazo, DD, Gm, F):
     resultados['other'] = resultados['%otrosgastos']
     resultados['emergency'] = resultados['%fondoemergencia']
     resultados['total'] = resultados['%ahorro'] * plazo
+    resultados['msg'] = "Ahorrando mensual $ " + '{:,}'.format(resultados['saving']).replace(",",".") \
+        + " , lograrás ahorrar $ " + '{:,}'.format(resultados['total']).replace(",",".") \
+        + ". Para otros gastos tendrías disponible mensual $ " \
+        + '{:,}'.format(resultados['emergency']).replace(",",".") + " en "+str(resultados['months']) + " meses."
     return resultados
 
 # solver

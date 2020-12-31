@@ -40,36 +40,30 @@
                 <fieldset class="results-options">
                     <ul>
                         <li>
-                            {% if res_1.status != "optimal" %}
+                            {% if res_1.status == "optimal" %}
                             <input type="radio" id="option1" name="option" value="1" required />
                             <label for="option1">
-                                Ahorrando mensual $ {{res_1.saving}}, lograrás ahorrar $ {{res_1.total}}.
-                                Para otros gastos tendrías disponible mensual $ {{res_1.other}}.
-                                En {{res_1.months}} meses.<br />
+                                {{ res_1.msg }}<br />
                             </label>
                             {% else %}
                             <p>La meta no es factible</p>
                             {% endif %}
                         </li>
                         <li>
-                            {% if res_2.status != "optimal" %}
+                            {% if res_2.status == "optimal" %}
                             <input type="radio" id="option2" name="option" value="2" />
                             <label for="option2">
-                                Ahorrando mensual $ {{res_2.saving}}, lograrás ahorrar $ {{res_2.total}}.
-                                Para otros gastos tendrías disponible mensual $ {{res_2.other}}.
-                                En {{res_2.months}} meses.<br />
+                                {{ res_2.msg }}<br />
                             </label>
                             {% else %}
                             <p>La meta no es factible</p>
                             {% endif %}
                         </li>
                         <li>
-                            {% if res_3.status != "optimal" %}
+                            {% if res_3.status == "optimal" %}
                             <input type="radio" id="option3" name="option" value="3" />
                             <label for="option3">
-                                Ahorrando mensual $ {{res_3.saving}}, lograrás ahorrar $ {{res_3.total}}.
-                                Para otros gastos tendrías disponible mensual $ {{res_3.other}}.
-                                En {{res_3.months}} meses.<br />
+                                {{ res_3.msg }}<br />
                             </label>
                             {% else %}
                             <p>La meta no es factible</p>

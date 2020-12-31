@@ -63,8 +63,7 @@ hr {
   flex-flow: row wrap;
   justify-content: center;
   margin-left: 4vw;
-  padding-top: 2vh;
-  padding-bottom: 1vh;
+  padding: 1.2rem 1rem;
   align-items: center;
   position: fixed;
   top: 0;
@@ -147,6 +146,9 @@ hr {
 @media screen and (max-width: 800px) {
   .nav-icon {
     display: inline-block;
+  }
+  .navbar {
+    margin: auto
   }
   .navbar .navbar-left,
   .navbar .navbar-right,
