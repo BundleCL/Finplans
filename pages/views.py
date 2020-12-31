@@ -111,7 +111,8 @@ def profile(request):
     bars_dd_data = financial_info.bars_dd_data()
     bars_goal_data = user_option.bars_goal_data()
     data = {'user_option': user_option, 'bars_dd_data': bars_dd_data,
-            'pie_expenses_data': pie_expenses_data, 'bars_goal_data': bars_goal_data}
+            'user_plan': user_option.msg(), 'bars_goal_data': bars_goal_data,
+            'pie_expenses_data': pie_expenses_data}
     return render(request, "profile.html", data)
 
 def login(request):

@@ -245,6 +245,9 @@
   color:  #ff0037;
   text-align: center;
 }
+.form ul li {
+  list-style-type: none;
+}
 
 /* Footer */
 .footer-row {

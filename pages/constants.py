@@ -21,3 +21,8 @@ COMM_TYPE = [
     ('Whatsapp', 'Whatsapp'),
     ('Email', 'Email')
 ]
+COMM_FREQ = [
+    ('1 vez por semana', '1 vez por semana'),
+    ('2 veces por semana', '2 veces por semana'),
+    ('3 veces por semana', '3 veces por semana')
+]

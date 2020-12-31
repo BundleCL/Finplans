@@ -31,10 +31,11 @@
         </div>
         <div id="content">
             <div class="form-container">
-                <h4>Para ayudarte, necesitamos algunos datos financieros</h4>
-                <form method="POST" class="flex-col form">
+                <h4>¡Ingresa tus datos para ayudarte a aumentar tu ahorro!</h4>
+                <p style="text-align: center;">Agrega tus principales fuentes de ingresos y gastos que posees</p>
+                <form method="POST" class="flex-col form" id="survey-form" onsubmit="handleSubmit();">
                     {% csrf_token %}
-                    <p>Ingreso Fijo</p>
+                    <p>Ingreso Fijo <span class="required">*</span></p>
                     {{form.fixed_income}}<br>
                     <p>Si cuentas con otra fuente de ingreso fija, agrégala aquí.</p>
                     {{form.fixed_income2}}<br>
@@ -64,33 +65,36 @@
                     <p>Agrega tus gastos de cuentas como luz, agua y gas.</p>
                     {{form.billing_expenses}}<br>
                     <p>Agrega tus gastos de celular, cable e internet.</p>
-                    {{form.phone_cable_internet_expenses}}<br>
+                    {{form.telecom_expenses}}<br>
                     <p>Agrega tus gastos en seguros, por ejemplo seguros de salud, del auto, de vida y de hogar.</p>
                     {{form.insurance_expenses}}<br>
 
                     <p>¡Agrega tus gastos que tienes en bares, restaurantes o salidas con tu polola!</p>
                     {{form.entertainment_expenses}}<br>
 
-                    <p>¿Cuál es tu objetivo de ahorro? Elige el más importante que debes cumplir.</p>
+                    <p>¿Cuál es tu objetivo de ahorro? Elige el más importante que debes cumplir. <span class="required">*</span></p>
                     {{form.objective}}<br>
-                    <p>Cuéntanos cuánto quieres ahorrar para cumplir tu objetivo de ahorro.</p>
+                    <p>Cuéntanos cuánto quieres ahorrar para cumplir tu objetivo de ahorro.<span class="required">*</span></p>
                     {{form.obj_savings}}<br>
-                    <p>En qué tiempo deseas cumplir esta meta (el plazo anótalo en meses).</p>
+                    <p>En qué tiempo deseas cumplir esta meta (el plazo anótalo en meses). <span class="required">*</span></p>
                     {{form.obj_months}}<br>
-                    <p>¿Cuánto dinero deseas tener para otros gastos? Me refiero al dinero que quieres dejarte para ti, sin contar tus costos fijos.</p>
+                    <p>¿Cuánto dinero deseas tener para otros gastos? Me refiero al dinero que quieres dejarte para ti,
+                        sin contar tus costos fijos. <span class="required">*</span></p>
                     {{form.extra_expenses}}<br>
                     <p>¿Deseas tener un fondo de emergencia? Para cualquier eventualidad. En caso de ser así, ¡agrégalo aquí!</p>
                     {{form.emergency_fund}}<br>
-                    <p>¿Con qué frecuencia deseas tener las alertas y notificaciones a tu correo o Whatsapp a partir de información tuya financiera (semanal)?</p>
+                    <p>¿Con qué frecuencia deseas tener las alertas y notificaciones a tu correo o Whatsapp a partir de información
+                        tuya financiera (semanal)? <span class="required">*</span></p>
                     {{form.alert_freq}}<br>
-                    <p>¿Qué tipo de alerta o seguimiento deseas obtener a tu correos con respecto a tu ahorro o tus finanzas personales?</p>
+                    <p>¿Qué tipo de alerta o seguimiento deseas obtener a tu correos con respecto a tu ahorro
+                        o tus finanzas personales? <span class="required">*</span></p>
                     {{form.alert_type}}<br>
-                    <p>Medio de comunicación donde se enviará la información</p>
+                    <p>Medio de comunicación donde se enviará la información <span class="required">*</span></p>
                     {{form.media}}<br>
-                    <p>¡Déjanos tu número de teléfono para poder comunicarnos y ayudarte con tu ahorro!</p>
+                    <p>¡Déjanos tu número de teléfono para poder comunicarnos y ayudarte con tu ahorro! <span class="required">*</span></p>
                     {{form.phone_number}}<br>
                     <br>
-                    <button type="submit" class="button center">Unirse</button>
+                    <button type="submit" class="button" style="margin-top: 1.5rem;">Enviar</button>
                     {% if form.errors %}
                     {% for field in form %}
                         {% for error in field.errors %}
@@ -132,12 +136,18 @@
 </html>
 <script>
     function myFunction() {
-  var x = document.getElementById("top-navbar");
-  if (x.className === "navbar") {
-    x.className = "responsive-nav";
-  } else {
-    x.className = "navbar";
-  }
+        var x = document.getElementById("top-navbar");
+        if (x.className === "navbar") {
+            x.className = "responsive-nav";
+        } else {
+            x.className = "navbar";
+        }
 }
-
+    function handleSubmit(){
+        var elements = document.querySelectorAll("#survey-form input[type=number]");
+        for (var i = 0, element; element = elements[i++];) {
+            if (element.value === "") element.value = 0;
+        }
+        document.getElementById("survey-form").submit();
+    }
 </script>

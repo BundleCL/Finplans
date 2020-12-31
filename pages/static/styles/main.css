@@ -142,6 +142,10 @@ hr {
   justify-content: space-between;
 }
 
+.required {
+  color: red;
+}
+
 /* Breakpoint at 800px: */
 @media screen and (max-width: 800px) {
   .nav-icon {

@@ -1,47 +1,53 @@
 import json
 from django.db import models
 from django.contrib.auth.models import User
-from .constants import OBJ_CHOICES, ALERT_TYPES, COMM_TYPE
+from multiselectfield import MultiSelectField
+from .constants import OBJ_CHOICES, ALERT_TYPES, COMM_TYPE, COMM_FREQ
 
 # Create your models here.
 class Financial(models.Model):
     # Income
     fixed_income = models.IntegerField()
-    fixed_income2 = models.IntegerField()
-    fixed_income3 = models.IntegerField()
-    extra_income = models.IntegerField()
+    fixed_income2 = models.IntegerField(default=0, blank=True, null=True)
+    fixed_income3 = models.IntegerField(default=0, blank=True, null=True)
+    extra_income = models.IntegerField(default=0, blank=True, null=True)
     # Family expenses
-    food_expenses = models.IntegerField()
-    transport_expenses = models.IntegerField()
-    health_expenses = models.IntegerField()
-    education_expenses = models.IntegerField()
-    clothing_expenses = models.IntegerField()
-    subscription_expenses = models.IntegerField()
+    food_expenses = models.IntegerField(default=0, blank=True, null=True)
+    transport_expenses = models.IntegerField(default=0, blank=True, null=True)
+    health_expenses = models.IntegerField(default=0, blank=True, null=True)
+    education_expenses = models.IntegerField(default=0, blank=True, null=True)
+    clothing_expenses = models.IntegerField(default=0, blank=True, null=True)
+    subscription_expenses = models.IntegerField(default=0, blank=True, null=True)
     # Home expenses
-    rent_expenses = models.IntegerField()
-    common_expenses = models.IntegerField()
-    billing_expenses = models.IntegerField()
-    phone_cable_internet_expenses = models.IntegerField()
-    insurance_expenses = models.IntegerField()
+    rent_expenses = models.IntegerField(default=0, blank=True, null=True)
+    common_expenses = models.IntegerField(default=0, blank=True, null=True)
+    billing_expenses = models.IntegerField(default=0, blank=True, null=True)
+    telecom_expenses = models.IntegerField(default=0, blank=True, null=True)
+    insurance_expenses = models.IntegerField(default=0, blank=True, null=True)
     # Entertainment expenses
-    entertainment_expenses = models.IntegerField()
+    entertainment_expenses = models.IntegerField(default=0, blank=True, null=True)
     objective = models.CharField(max_length = 100, choices = OBJ_CHOICES)
     obj_savings = models.IntegerField()
     obj_months = models.IntegerField()
     extra_expenses = models.IntegerField()
-    emergency_fund = models.IntegerField()
-    alert_freq = models.IntegerField()
-    alert_type = models.CharField(max_length = 100, choices = ALERT_TYPES)
-    media = models.CharField(max_length = 20, choices = COMM_TYPE) 
+    emergency_fund = models.IntegerField(default=0, blank=True, null=True)
+    alert_freq = models.CharField(max_length = 100, choices = COMM_FREQ)
+    alert_type = MultiSelectField(max_length = 255, choices = ALERT_TYPES)
+    media = MultiSelectField(max_length = 255, choices = COMM_TYPE) 
     phone_number = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        # pylint: disable=E1101
+        usr = self.user
+        return f'Datos financieros de {usr.first_name} {usr.last_name}'
 
     def get_totals(self):
         income = self.fixed_income + self.fixed_income2 + self.fixed_income3 + self.extra_income
         expenses = (self.food_expenses + self.transport_expenses + self.health_expenses +
         self.education_expenses + self.clothing_expenses + self.subscription_expenses +
         self.rent_expenses + self.common_expenses + self.billing_expenses +
-        self.phone_cable_internet_expenses + self.insurance_expenses + self.entertainment_expenses)
+        self.telecom_expenses + self.insurance_expenses + self.entertainment_expenses)
         return (income, expenses)
 
     def get_meta(self):
@@ -90,7 +96,7 @@ class Financial(models.Model):
             {"name": "Salud", "y": self.health_expenses},
             {"name": "Subscripciones", "y": self.subscription_expenses},
             {"name": "Cuentas", "y": self.billing_expenses},
-            {"name": "Telecomunicaciones", "y": self.phone_cable_internet_expenses},
+            {"name": "Telecomunicaciones", "y": self.telecom_expenses},
             {"name": "Seguros", "y": self.insurance_expenses},
             {"name": "Ropa", "y": self.clothing_expenses},
             {"name": "Entretención", "y": self.entertainment_expenses},]
@@ -107,6 +113,11 @@ class Option(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
+        # pylint: disable=E1101
+        usr = self.user
+        return f'Meta financiera de {usr.first_name} {usr.last_name}'
+
+    def msg(self):
         return "Tu meta de ahorro es $ %s, con un fondo emergencia de $ %s.  \
             Además, cuentas con $ %s para otros gastos en un plazo de %s meses." % (
             f"{self.saving:,}".replace(",","."), f"{self.emergency:,}".replace(",","."),

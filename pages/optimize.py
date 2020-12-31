@@ -46,7 +46,7 @@ def fact(meta, plazo, DD, Gm, F):
     resultados['msg'] = "Ahorrando mensual $ " + '{:,}'.format(resultados['saving']).replace(",",".") \
         + " , lograrás ahorrar $ " + '{:,}'.format(resultados['total']).replace(",",".") \
         + ". Para otros gastos tendrías disponible mensual $ " \
-        + '{:,}'.format(resultados['emergency']).replace(",",".") + " en "+str(resultados['months']) + " meses."
+        + '{:,}'.format(resultados['other']).replace(",",".") + " en "+str(resultados['months']) + " meses."
     return resultados
 
 def tiempo(meta, DD, Gm, F):
@@ -88,7 +88,7 @@ def tiempo(meta, DD, Gm, F):
     resultados['msg'] = "Ahorrando mensual $ " + '{:,}'.format(resultados['saving']).replace(",",".") \
         + " , lograrás ahorrar $ " + '{:,}'.format(resultados['total']).replace(",",".") \
         + ". Para otros gastos tendrías disponible mensual $ " \
-        + '{:,}'.format(resultados['emergency']).replace(",",".") + " en "+str(resultados['months']) + " meses."
+        + '{:,}'.format(resultados['other']).replace(",",".") + " en "+str(resultados['months']) + " meses."
     return resultados
 
 
@@ -133,7 +133,7 @@ def costos(meta, plazo, DD, Gm, F):
     resultados['msg'] = "Ahorrando mensual $ " + '{:,}'.format(resultados['saving']).replace(",",".") \
         + " , lograrás ahorrar $ " + '{:,}'.format(resultados['total']).replace(",",".") \
         + ". Para otros gastos tendrías disponible mensual $ " \
-        + '{:,}'.format(resultados['emergency']).replace(",",".") + " en "+str(resultados['months']) + " meses."
+        + '{:,}'.format(resultados['other']).replace(",",".") + " en "+str(resultados['months']) + " meses."
     return resultados
 
 # solver
