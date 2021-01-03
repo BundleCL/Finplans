@@ -62,8 +62,7 @@ hr {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  margin-left: 4vw;
-  padding: 1.2rem 1rem;
+  padding: 1.2rem 1rem 1.1rem 2.5rem;
   align-items: center;
   position: fixed;
   top: 0;

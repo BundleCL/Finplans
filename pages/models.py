@@ -72,22 +72,14 @@ class Financial(models.Model):
             "chart": {"type": "column"},
             "title": {"text": "Tu dinero disponible es $ %s"%f"{(income-expenses):,}".replace(",",".")},
             "xAxis": {"categories": ["Dinero disponible"]},
+            "yAxis": {"min": 0, "title": {"text": 'Monto ($)'}},
             "series": [{"name": "Ingresos fijos ($) ", "data": [income], "color": "#7ba3e3"},
             {"name": "Gastos fijos ($)", "data": [expenses],  "color": "#eb463d"}]
         }
         return json.dumps(bars_data)
     
     def pie_expenses_data(self):
-        pie_data = {
-            "chart": {"type": "pie"},
-            "title": {"text": "Tus principales gastos son"},
-            "tooltip": {"pointFormat": '{series.name}: <b>{point.percentage:.1f}%</b> <br>valor ($): {point.y}'},
-            "accessibility": {"point": {"valueSuffix": '%'}},
-            "plotOptions": {
-                "pie": {"allowPointSelect": "true", "cursor": 'pointer', "showInLegend": "true",
-                "dataLabels": {"enabled": "true", "format": '<b>{point.name}</b>:<br>{point.percentage:.1f} %'}}},
-            "series": [{
-                "name": "Gastos", "data": [
+        data = [
             {"name": "Arriendo", "y": self.rent_expenses},
             {"name": "Gastos comunes", "y": self.common_expenses},
             {"name": "Supermercado", "y": self.food_expenses},
@@ -99,7 +91,18 @@ class Financial(models.Model):
             {"name": "Telecomunicaciones", "y": self.telecom_expenses},
             {"name": "Seguros", "y": self.insurance_expenses},
             {"name": "Ropa", "y": self.clothing_expenses},
-            {"name": "Entretención", "y": self.entertainment_expenses},]
+            {"name": "Entretención", "y": self.entertainment_expenses}
+            ]
+        pie_data = {
+            "chart": {"type": "pie"},
+            "title": {"text": "Tus principales gastos son:"},
+            "tooltip": {"pointFormat": '{series.name}: <b>{point.percentage:.1f}%</b> <br>valor ($): {point.y}'},
+            "accessibility": {"point": {"valueSuffix": '%'}},
+            "plotOptions": {
+                "pie": {"allowPointSelect": "true", "cursor": 'pointer', "showInLegend": "true",
+                "dataLabels": {"enabled": "true", "format": '<b>{point.name}</b>:<br>{point.percentage:.1f} %'}}},
+            "series": [{
+                "name": "Gastos", "data": list(filter(lambda d: d['y'] > 0, data))
             }]
         }
         return json.dumps(pie_data)
@@ -127,8 +130,9 @@ class Option(models.Model):
         bars_data = {
             "chart": {"type": "column"},
             "title": {"text": "Tu plan de ahorro"},
-            "xAxis": {"categories": ["Mes"]},
-            "series": [{"data": [self.saving * i for i in range(1, self.months+2)],
-                "color": "#7ba3e3", "name": "Monto ($)"}]
+            "xAxis": {"categories": [i for i in range(1, self.months+1)]},
+            "yAxis": {"min": 0, "title": {"text": 'Monto total ($)'}},
+            "series": [{"data": [self.saving * i for i in range(1, self.months+1)],
+                "color": "#7ba3e3", "name": "Monto por mes ($)"}]
         }
         return json.dumps(bars_data)
