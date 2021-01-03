@@ -71,7 +71,12 @@
                         </li>
                     </ul>
                 </fieldset>
-                <button type="submit" class="button center">Guardar meta</button>
+                <div class="buttons">
+                    {% if res_1.status == "optimal" or res_2.status == "optimal" or res_3.status == "optimal" %}
+                    <button type="submit" class="button center">Guardar meta</button>
+                    {% endif %}
+                    <a href="/survey" class="button">Volver</a>
+                </div>
             </form>
         </div>
         <footer>

@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as do_login
 from django.contrib.auth import logout as do_logout
@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.forms.models import model_to_dict
 from .forms import SignUpForm
 from .forms import FinancialDataForm
 from .models import Financial, Option
@@ -53,17 +54,18 @@ def register(request):
 @login_required(login_url='login')
 def survey(request):
     financial_info = request.user.financial_set.first()
-    if financial_info: # si no llena encuesta
-        return redirect('results')
-    form = FinancialDataForm()
     if request.method == 'POST':
-        form = FinancialDataForm(request.POST)
+        form = FinancialDataForm(request.POST or None, instance=financial_info)
         if (form.is_valid()):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
             return redirect('results')
-
+    else:
+        if financial_info:
+            form = FinancialDataForm(initial=model_to_dict(financial_info))
+        else:
+            form = FinancialDataForm()
     return render(request, 'survey.html', {'form': form})
 
 @login_required(login_url='login')
@@ -71,8 +73,6 @@ def results(request):
     financial_info = request.user.financial_set.first()
     if not financial_info: # si no llena encuesta
         return redirect('survey')
-    if request.user.option_set.first(): # si ya tiene opcion elegida
-        return redirect('profile')
     # reemplazar datos desde solver
     meta, plazo = financial_info.get_meta(), financial_info.get_plazo()
     DD, Gm, F = financial_info.get_DD(), financial_info.get_Gm(), financial_info.get_F()
@@ -81,18 +81,13 @@ def results(request):
     if request.method == 'POST':
         value = request.POST['option']
         # ver opcion elegida
-        if value == "1":
-            d = solver_data['res_1']
-        elif value == "2":
-            d = solver_data['res_2']
-        else:
-            d = solver_data['res_3']
-        print('-----------------------------------')
-        print(d)
+        if value == "1": d = solver_data['res_1']
+        elif value == "2": d = solver_data['res_2']
+        else: d = solver_data['res_3']
         #crear opcion
-        option = Option.objects.create(user=request.user, saving=d['saving'],
-        other=d['other'], emergency=d['emergency'], months=d['months'])
-        option.save()
+        option = Option.objects.update_or_create(user=request.user,
+            defaults={"saving": d['saving'], "other": d['other'],
+            "emergency": d['emergency'], "months": d['months']})
         if option:
             return redirect('profile')
     
