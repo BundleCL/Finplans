@@ -5,6 +5,7 @@ body {
   display: flex;
   flex-direction: column;
   align-content: center;
+  margin: 0.5rem 0.8rem;
 }
 h1,
 h2,
@@ -75,7 +76,7 @@ hr {
   display: flex;
   flex-flow: row wrap;
   flex-grow: 2;
-  gap: 3vw;
+  column-gap: 4rem;
 }
 .navbar-right {
   margin-left: 2vw;
@@ -87,8 +88,8 @@ hr {
   font-family: Lato;
   font-style: normal;
   font-weight: 800;
-  font-size: 5vh;
-  line-height: 5vh;
+  font-size: 2rem;
+  line-height: 2rem;
   letter-spacing: -0.015em;
   text-decoration: none;
   margin-right: 1rem;
@@ -151,12 +152,18 @@ hr {
     display: inline-block;
   }
   .navbar {
-    margin: auto
+    margin: auto;
+    padding: 1rem 0;
+    justify-content: normal;
+    margin-bottom: 3rem;
   }
   .navbar .navbar-left,
   .navbar .navbar-right,
   .responsive-nav .navbar-right {
     display: none;
+  }
+  .navbar .logo {
+    margin: 0 auto;
   }
   .responsive-nav {
     position: sticky;
@@ -174,20 +181,21 @@ hr {
     transform: scale(0);
   }
   .responsive-nav .navbar-left,
+  .responsive-nav .navbar-right,
   .responsive-nav .logo {
     display: flex;
     flex-direction: column;
-    margin-bottom: 2vh;
+    margin-bottom: 1rem;
   }
   .responsive-nav a.logo {
     margin: 0 auto;
     width: 100%;
     text-align: center;
-    display: inline;
+    position: absolute;
+    top: 2rem;
   }
   .responsive-nav .navbar-left a {
     margin-left: 3vh;
-    margin-bottom: 1.25vh;
     width: 100%;
     color: #132d7d;
   }

@@ -313,9 +313,10 @@ fieldset.results-options label {
   }
   .col-1 {
     text-align: center;
+    padding: 1rem 0rem;
   }
   .col-1 h2 {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
   .col-1 h4 {
     font-size: 1rem;
