@@ -161,7 +161,8 @@ hr {
   .responsive-nav {
     position: sticky;
     top: 0;
-    background-color: #132d7d10;
+    background-color: #eff1f9;
+    z-index: 1;
   }
   .responsive-nav .nav-icon:before {
     transform: translateY(12px) rotate(135deg);

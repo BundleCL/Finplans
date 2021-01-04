@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css"href="{% static 'styles/main.css' %}"/>
         <link rel="stylesheet" type="text/css"href="{% static 'styles/index.css' %}" />
         <title>Finplans</title>
+        <script src="//code.jivosite.com/widget/pEEGblBLRA" async></script>
     </head>
     <body>
         <div class="navbar" id="top-navbar">
@@ -24,7 +25,7 @@
             <div class="navbar-right">
                 {% if user.is_authenticated %}
                 <a href="profile" class="button">Perfil</a>
-                <a href="logout" class="button">Cerrar sesión</a>
+                <a href="logout" class="button dark-btn">Cerrar sesión</a>
                 {% else %}
                 <a href="login" class="button center">Ingresar</a>
                 {% endif %}
@@ -87,6 +88,10 @@
                     <div class="number-circle"><p>4</p></div>
                     <p class="left-align">Te acompañamos en el proceso</p>
                 </div>
+            </div>
+            <div id="planes" class="flex-col">
+                <h2>Planes</h2>
+                <img src="{% static 'imgs/plans.jpeg' %}"/>
             </div>
             <div id="testimonios" class="flex-col">
                 <h2>Testimonios</h2>

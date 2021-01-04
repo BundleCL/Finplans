@@ -13,7 +13,7 @@ def fact(meta, plazo, DD, Gm, F):
     c2 = Constraint(g * DD, lb=Gm)
     #El % de ahorro * dinero disponible * el plazo debe ser estrictamente igual a la meta
     c3 = Constraint(a * DD * plazo, lb=meta ,ub=meta)
-    c4 = Constraint(f, lb=F, ub=F)
+    c4 = Constraint(f * DD, lb=F, ub=F)
 
     # An objective can be formulated
     obj = Objective(a * DD * plazo, direction='max')
@@ -29,7 +29,6 @@ def fact(meta, plazo, DD, Gm, F):
     #print("----------")
     resultados = {'%ahorro':0, '%otrosgastos':0, '%fondoemergencia':0, 'status': status, 'months':plazo}
     for var_name, var in model.variables.iteritems():
-        #print(var_name, "=", round(var.primal * DD))
         resultados[var_name] = round(var.primal*DD)
     if model.status == 'optimal':  
         print('Opcion 1:')
@@ -51,7 +50,7 @@ def fact(meta, plazo, DD, Gm, F):
 
 def tiempo(meta, DD, Gm, F):
     plazo = 0
-    while plazo <100:
+    while plazo <= 60:
         a = Variable('%ahorro', lb=0, ub=1)
         g = Variable('%otrosgastos', lb=0, ub=1)
         f = Variable('%fondoemergencia', lb=0, ub=1)
@@ -61,16 +60,15 @@ def tiempo(meta, DD, Gm, F):
         c2 = Constraint(g * DD, lb=Gm)
     #El % de ahorro * dinero disponible * el plazo debe ser estrictamente igual a la meta
         c3 = Constraint(a * DD * plazo, lb=meta, ub=meta)
-        c4 = Constraint(f, lb=F, ub=F)
+        c4 = Constraint(f * DD, lb=F, ub=F)
     # An objective can be formulated
         obj = Objective(a * DD * plazo, direction='max')
     # Variables, constraints and objective are combined in a Model object, which can subsequently be optimized.
         model = Model(name='Simple model')
         model.objective = obj
         model.add([c1, c2, c3, c4])
-
+        resultados = dict()
         status = model.optimize()
-        resultados = {'status': status, 'months': plazo}
         for var_name, var in model.variables.iteritems():
             #print(var_name, "=", round(var.primal * DD))
             resultados[var_name] = round(var.primal*DD)
@@ -80,7 +78,11 @@ def tiempo(meta, DD, Gm, F):
             print('Para otros gastos tendrías disponible mensual',resultados['%otrosgastos'])
             print('En',plazo,'meses')
             break
-        plazo +=1  
+        plazo +=1
+    if plazo > 60:
+        status = 'overtime'
+    resultados.update({'status': status, 'months': plazo})
+    resultados['months'] = plazo
     resultados['saving'] = resultados['%ahorro']
     resultados['other'] = resultados['%otrosgastos']
     resultados['emergency'] = resultados['%fondoemergencia']
@@ -102,7 +104,7 @@ def costos(meta, plazo, DD, Gm, F):
     c2 = Constraint(g * DD, lb=Gm, ub=Gm)
   #El % de ahorro * dinero disponible * el plazo debe ser estrictamente igual a la meta
     c3 = Constraint(a * DD * plazo, lb=meta)
-    c4 = Constraint(f, lb=F, ub=F)
+    c4 = Constraint(f * DD, lb=F, ub=F)
 
   # An objective can be formulated
     obj = Objective(a * DD * plazo, direction='max')

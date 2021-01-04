@@ -188,6 +188,20 @@
   max-width: 16vw;
   margin: 5vw;
 }
+#planes {
+  margin: 0 auto;
+}
+
+#planes img {
+  max-width: 100%;
+  height: auto;
+}
+
+.dark-btn {
+  background: lightgray;
+  color: darkslateblue;
+}
+
 /* Utilidades */
 
 .opacity08 {
@@ -313,6 +327,7 @@ fieldset.results-options label {
   #asi-de-facil h2,
   #testimonios h2,
   #nosotros h2,
+  #planes h2,
   .col-3 h2 {
     font-size: 2rem;
   }

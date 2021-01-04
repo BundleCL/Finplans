@@ -123,7 +123,7 @@ class Option(models.Model):
     def msg(self):
         return "Tu meta de ahorro es $ %s, con un fondo emergencia de $ %s.  \
             Además, cuentas con $ %s para otros gastos en un plazo de %s meses." % (
-            f"{self.saving:,}".replace(",","."), f"{self.emergency:,}".replace(",","."),
+            f"{self.saving * self.months:,}".replace(",","."), f"{self.emergency:,}".replace(",","."),
             f"{self.other:,}".replace(",","."), self.months)
     
     def bars_goal_data(self):

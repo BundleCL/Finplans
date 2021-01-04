@@ -8,7 +8,8 @@
         {% load static %}
         <link rel="stylesheet" type="text/css"href="{% static 'styles/main.css' %}"/>
         <link rel="stylesheet" type="text/css"href="{% static 'styles/index.css' %}" />
-        <title>Finplans</title>
+        <title>Datos financieros</title>
+        <script src="//code.jivosite.com/widget/pEEGblBLRA" async></script>
     </head>
     <body>
         <div class="navbar" id="top-navbar">
@@ -23,7 +24,7 @@
             </div>
             <div class="navbar-right">
                 {% if user.is_authenticated %}
-                <a href="logout" class="button">Cerrar sesión</a>
+                <a href="logout" class="button dark-btn">Cerrar sesión</a>
                 {% else %}
                 <a href="register" class="button center">Unirse</a>
                 {% endif %}
@@ -78,7 +79,7 @@
                     {{form.obj_savings}}<br>
                     <p>En qué tiempo deseas cumplir esta meta (el plazo anótalo en meses). <span class="required">*</span></p>
                     {{form.obj_months}}<br>
-                    <p>¿Cuánto dinero deseas tener para otros gastos? Me refiero al dinero que quieres dejarte para ti,
+                    <p>¿Cuánto dinero mensual deseas tener para otros gastos? Me refiero al dinero que quieres dejarte para ti,
                         sin contar tus costos fijos. <span class="required">*</span></p>
                     {{form.extra_expenses}}<br>
                     <p>¿Deseas tener un fondo de emergencia? Para cualquier eventualidad. En caso de ser así, ¡agrégalo aquí!</p>

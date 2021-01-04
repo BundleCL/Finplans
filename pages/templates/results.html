@@ -26,7 +26,7 @@
         </div>
         <div class="navbar-right">
             {% if user.is_authenticated %}
-            <a href="logout" class="button">Cerrar sesión</a>
+            <a href="logout" class="button dark-btn">Cerrar sesión</a>
             {% else %}
             <a href="register" class="button center">Unirse</a>
             {% endif %}
@@ -55,6 +55,8 @@
                             <label for="option2">
                                 {{ res_2.msg }}<br />
                             </label>
+                            {% elif res_2.months > 60 %}
+                            <p>Con las condiciones entregadas, tomaría un plazo mayor a 60 meses (5 años)</p>
                             {% else %}
                             <p>La meta no es factible</p>
                             {% endif %}
@@ -75,7 +77,7 @@
                     {% if res_1.status == "optimal" or res_2.status == "optimal" or res_3.status == "optimal" %}
                     <button type="submit" class="button center">Guardar meta</button>
                     {% endif %}
-                    <a href="/survey" class="button">Volver</a>
+                    <a href="/survey" class="button dark-btn">Volver</a>
                 </div>
             </form>
         </div>
